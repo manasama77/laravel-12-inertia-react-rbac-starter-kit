@@ -1,0 +1,69 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+CHANGELOG.md export-ignore
+README.md export-ignore
+.github/workflows/browser-tests.yml export-ignore
+
+# ===== Add: JavaScript/React Files =====
+*.js text eol=lf diff=javascript
+*.jsx text eol=lf diff=javascript
+*.ts text eol=lf diff=javascript
+*.tsx text eol=lf diff=javascript
+*.json text eol=lf
+*.mjs text eol=lf
+
+# ===== Add: Config Files =====
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.lock text eol=lf -diff
+.env.example text eol=lf
+.editorconfig text eol=lf
+
+# ===== Add: Shell Scripts =====
+*.sh text eol=lf
+
+# ===== Add: CSS Preprocessors =====
+*.scss text eol=lf diff=css
+*.sass text eol=lf diff=css
+*.less text eol=lf diff=css
+
+# ===== Add: SQL =====
+*.sql text eol=lf
+
+# ===== Binary Files (Don't normalize) =====
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+
+# ===== Existing Export Ignore (Keep) =====
+CHANGELOG.md export-ignore
+README.md export-ignore
+.github/workflows/browser-tests.yml export-ignore
+
+# ===== Add: More Export Ignore =====
+.gitattributes export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
+phpunit.xml export-ignore
+phpstan.neon export-ignore
+pint.json export-ignore
+.github export-ignore
+tests export-ignore
+.env.example export-ignore
