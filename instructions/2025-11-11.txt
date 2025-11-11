@@ -1,0 +1,96 @@
+**Goal:** Generate code for Laravel 12 + Inertia.js + React.js + Spatie Laravel-Permission to set up roles, permissions, default Super Admin user, authentication using `username`, and CRUD pages using Inertia.
+
+---
+
+### 1. Create Seeder for Roles
+Seed these roles:
+- Super Admin
+- Owner
+- Admin
+- Team Leader Sales
+- Sales
+- Team Leader Installer
+- Installer
+- Customer Service
+- Finance
+- NOC
+
+### 2. Create Seeder for Permissions (Spatie)
+Under **Settings**, seed permissions:
+
+**General**
+- Application Settings
+
+**User Management**
+- View Users
+- Create Users
+- Edit Users
+- Delete Users
+
+**Role Management**
+- View Roles
+- Create Roles
+- Edit Roles
+- Delete Roles
+
+**Permission Management**
+- View Permissions
+- Create Permissions
+- Edit Permissions
+- Delete Permissions
+
+Assign **all** permissions to **Super Admin**.
+
+### 3. Create Default Super Admin User Seeder
+User details:
+- Name: `Super Admin`
+- Username: `superadmin`
+- Email: `superadmin@pass.net.id`
+- Password: `password`
+- Assign Role: `Super Admin`
+
+### 4. Change Authentication to Use Username Instead of Email
+- Update `users` table to include `username` (unique).
+- Modify login form and controller (Laravel Breeze/Inertia preset) to authenticate using `username`.
+- Update `config/auth.php` to use `username` as identifier.
+
+### 5. Generate CRUD Pages (Inertia + React)
+Create:
+- `UsersController` + Inertia pages (index, create, edit)
+- `RolesController` + pages
+- `PermissionsController` + pages
+
+Use:
+- React components for forms and tables
+- Tailwind + ShadCN UI (or existing components)
+- Use Spatie API for role/permission sync
+
+### 6. Add Routes
+Add to `web.php`:
+
+```php
+Route::prefix('settings')
+    ->middleware(['auth', 'role:Super Admin'])
+    ->group(function () {
+        Route::resource('users', UsersController::class);
+        Route::resource('roles', RolesController::class);
+        Route::resource('permissions', PermissionsController::class);
+    });
+```
+
+Expected Output:
+- Seeder classes for roles, permissions, and default Super Admin user
+- Updated authentication to use username
+- Full Inertia-based CRUD React pages for managing Users, Roles, and Permissions
+- Route group protected by Super Admin role
+
+
+Also implement laravel spatie super admin in correct way, see reference from https://spatie.be/docs/laravel-permission/v6/basic-usage/super-admin
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+the menu for latest CRUD are missing, please also create the menu with following details:
+- Menu Group: Settings
+- Menu Items:
+  - Users Management (link to Users index page)
+  - Roles Management (link to Roles index page)
+  - Permissions Management (link to Permissions index page)
