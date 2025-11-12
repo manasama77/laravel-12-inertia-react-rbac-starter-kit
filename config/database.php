@@ -64,7 +64,7 @@ return [
         ],
 
         'mysql_testing' => [
-            'driver' => 'mysql',
+            'driver' => env('DB_CONNECTION_TEST', 'mysql'),
             'url' => env('DB_URL'),
             'host' => env('DB_HOST_TEST', '127.0.0.1'),
             'port' => env('DB_PORT_TEST', '3306'),
