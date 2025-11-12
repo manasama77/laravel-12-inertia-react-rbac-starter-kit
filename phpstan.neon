@@ -1,5 +1,5 @@
 includes:
-    - vendor/nunomaduro/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
 
 parameters:
     paths:
@@ -9,10 +9,5 @@ parameters:
     # Level 0-9 (0=basic, 9=strictest)
     level: 5
 
-    ignoreErrors:
-        - '#PHPDoc tag @var#'
-
     excludePaths:
         - ./*/*/FileToBeExcluded.php
-
-    checkMissingIterableValueType: false

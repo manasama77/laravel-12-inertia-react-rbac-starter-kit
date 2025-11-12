@@ -38,7 +38,7 @@ export function ButtonDeleteWithDialog({
       <Button
         variant="default"
         size="sm"
-        className="bg-red-500 text-white hover:bg-red-500/70 hover:text-white"
+        className="cursor-pointer bg-red-500 text-white hover:bg-red-500/70 hover:text-white"
         onClick={() => setOpen(true)}
         disabled={disabled}
       >

@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Serve Laravel",
+      "type": "shell",
+      "command": "php artisan serve",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Run Vite Dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Start Development",
+      "dependsOn": ["Serve Laravel", "Run Vite Dev"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

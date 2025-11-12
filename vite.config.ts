@@ -5,23 +5,33 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            ssr: 'resources/js/ssr.tsx',
-            refresh: true,
-        }),
-        react({
-            babel: {
-                plugins: ['babel-plugin-react-compiler'],
-            },
-        }),
-        tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        }),
-    ],
-    esbuild: {
-        jsx: 'automatic',
+  resolve: {
+    alias: {
+      '@images': '/resources/images',
     },
+  },
+  server: {
+    hmr: {
+      overlay: true, // Show error overlay instead of reloading
+    },
+  },
+  plugins: [
+    laravel({
+      input: ['resources/css/app.css', 'resources/js/app.tsx'],
+      ssr: 'resources/js/ssr.tsx',
+      refresh: true,
+    }),
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }),
+    tailwindcss(),
+    wayfinder({
+      formVariants: true,
+    }),
+  ],
+  esbuild: {
+    jsx: 'automatic',
+  },
 });

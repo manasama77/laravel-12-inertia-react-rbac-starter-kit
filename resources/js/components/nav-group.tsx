@@ -20,25 +20,26 @@ export interface NavItem {
   icon?: LucideIcon;
   items?: NavItem[];
   badge?: string;
-  requiresRole?: string; // Optional role requirement
+  requiresRole?: string | string[]; // Optional role requirement
 }
 
 interface NavGroupProps {
-  label: string;
+  label?: string | null;
   items: NavItem[];
-  requiresRole?: string; // Optional role requirement for entire group
+  requiresRole?: string | string[]; // Optional role requirement for entire group
 }
 
-export function NavGroup({ label, items, requiresRole }: NavGroupProps) {
+export function NavGroup({ label = null, items, requiresRole }: NavGroupProps) {
   const page = usePage<SharedData>();
   const { auth } = page.props;
 
   // Check if user has required role (if specified)
   if (requiresRole) {
+    const requiredRoles = Array.isArray(requiresRole) ? requiresRole : [requiresRole];
     const hasRole =
       auth.user?.roles &&
       Array.isArray(auth.user.roles) &&
-      auth.user.roles.some(role => role.name === requiresRole);
+      auth.user.roles.some(role => requiredRoles.includes(role.name));
 
     if (!hasRole) {
       return null;
@@ -47,15 +48,18 @@ export function NavGroup({ label, items, requiresRole }: NavGroupProps) {
 
   return (
     <SidebarGroup className="px-2 py-0">
-      <SidebarGroupLabel>{label}</SidebarGroupLabel>
+      {label && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
       <SidebarMenu>
         {items.map(item => {
           // Check individual item role requirement
           if (item.requiresRole) {
+            const requiredRoles = Array.isArray(item.requiresRole)
+              ? item.requiresRole
+              : [item.requiresRole];
             const hasRole =
               auth.user?.roles &&
               Array.isArray(auth.user.roles) &&
-              auth.user.roles.some(role => role.name === item.requiresRole);
+              auth.user.roles.some(role => requiredRoles.includes(role.name));
 
             if (!hasRole) {
               return null;
@@ -90,10 +94,13 @@ export function NavGroup({ label, items, requiresRole }: NavGroupProps) {
                       {item.items.map(subItem => {
                         // Check sub-item role requirement
                         if (subItem.requiresRole) {
+                          const requiredRoles = Array.isArray(subItem.requiresRole)
+                            ? subItem.requiresRole
+                            : [subItem.requiresRole];
                           const hasRole =
                             auth.user?.roles &&
                             Array.isArray(auth.user.roles) &&
-                            auth.user.roles.some(role => role.name === subItem.requiresRole);
+                            auth.user.roles.some(role => requiredRoles.includes(role.name));
 
                           if (!hasRole) {
                             return null;

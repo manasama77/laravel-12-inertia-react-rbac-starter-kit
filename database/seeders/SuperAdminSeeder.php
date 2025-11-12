@@ -27,7 +27,7 @@ class SuperAdminSeeder extends Seeder
 
         // Assign Super Admin role
         $superAdminRole = Role::where('name', 'Super Admin')->first();
-        if ($superAdminRole && !$superAdmin->hasRole('Super Admin')) {
+        if ($superAdminRole && ! $superAdmin->hasRole('Super Admin')) {
             $superAdmin->assignRole($superAdminRole);
         }
     }

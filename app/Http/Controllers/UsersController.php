@@ -57,7 +57,7 @@ class UsersController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        if (!empty($validated['roles'])) {
+        if (! empty($validated['roles'])) {
             $user->assignRole($validated['roles']);
         }
 
@@ -106,7 +106,7 @@ class UsersController extends Controller
             'email' => $validated['email'],
         ]);
 
-        if (!empty($validated['password'])) {
+        if (! empty($validated['password'])) {
             $user->update([
                 'password' => Hash::make($validated['password']),
             ]);

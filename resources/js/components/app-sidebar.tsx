@@ -1,4 +1,3 @@
-import { NavFooter } from '@/components/nav-footer';
 import { NavGroup, type NavItem } from '@/components/nav-group';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -15,7 +14,7 @@ import RoutePermission from '@/routes/permissions';
 import RouteRole from '@/routes/roles';
 import RouteUser from '@/routes/users';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Settings, Shield, ShieldCheck, Users } from 'lucide-react';
+import { LayoutGrid, Settings, Shield, ShieldCheck, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 // Main navigation items
@@ -34,30 +33,31 @@ const platformNavItems: NavItem[] = [
   // },
 ];
 
-// Settings navigation items (requires Super Admin role)
+// Settings navigation items (requires Super Admin & Owner role)
 const settingsNavItems: NavItem[] = [
   {
-    title: 'Managements',
+    title: 'Settings',
     href: '#',
     icon: Settings,
     items: [
       {
-        title: 'Users Management',
+        title: 'Users',
         href: RouteUser.index.url(),
         icon: Users,
       },
       {
-        title: 'Roles Management',
+        title: 'Roles',
         href: RouteRole.index.url(),
         icon: Shield,
       },
       {
-        title: 'Permissions Management',
+        title: 'Permissions',
         href: RoutePermission.index.url(),
         icon: ShieldCheck,
       },
     ],
   },
+
   // Example: Add more collapsible groups or single items
   // {
   //   title: 'Configuration',
@@ -67,18 +67,18 @@ const settingsNavItems: NavItem[] = [
   // },
 ];
 
-const footerNavItems: NavItem[] = [
-  {
-    title: 'Repository',
-    href: 'https://github.com/laravel/react-starter-kit',
-    icon: Folder,
-  },
-  {
-    title: 'Documentation',
-    href: 'https://laravel.com/docs/starter-kits#react',
-    icon: BookOpen,
-  },
-];
+// const footerNavItems: NavItem[] = [
+//   {
+//     title: 'Repository',
+//     href: 'https://github.com/laravel/react-starter-kit',
+//     icon: Folder,
+//   },
+//   {
+//     title: 'Documentation',
+//     href: 'https://laravel.com/docs/starter-kits#react',
+//     icon: BookOpen,
+//   },
+// ];
 
 export function AppSidebar() {
   return (
@@ -96,12 +96,12 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavGroup label="Platform" items={platformNavItems} />
-        <NavGroup label="Settings" items={settingsNavItems} requiresRole="Super Admin" />
+        <NavGroup label="Menu" items={platformNavItems} />
+        <NavGroup items={settingsNavItems} requiresRole="Super Admin" />
       </SidebarContent>
 
       <SidebarFooter>
-        <NavFooter items={footerNavItems} className="mt-auto" />
+        {/* <NavFooter items={footerNavItems} className="mt-auto" /> */}
         <NavUser />
       </SidebarFooter>
     </Sidebar>
